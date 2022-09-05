@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { defineComponent } from "vue";
 import { store } from "./store";
+import FilterBar from "./FilterBar.vue";
 </script>
 
 <template>
@@ -11,52 +12,20 @@ import { store } from "./store";
       med allt du behöver hjälp med hemma.
     </p>
   </div>
-  <input type="text" v-model="filters" />
-  <button type="button" @click="setFilters">Sök</button>
-
-  <div class="sort-button" v-show="hasFilterd">
-    <label for="Sort"> Sortera </label>
-    <select @change="sortInput" name="Sort" id="Sort">
-      <option></option>
-      <option value="grade_desc">Betyg</option>
-      <option value="grade_asc">Betyg (Lägst först)</option>
-    </select>
-  </div>
+  <FilterBar :showFilters="false" />
 </template>
 
 <script lang="ts">
 export default defineComponent({
   data() {
-    return { store, filters: "", hasFilterd: false };
+    return { store };
   },
-  methods: {
-    setFilters() {
-      this.hasFilterd = true;
-      store.filters[0] = this.filters;
-      store.applyFilters();
-    },
-    sortInput(event: any) {
-      this.hasFilterd = true;
-      switch (event.target.value) {
-        case "grade_asc":
-          this.store.sortRating();
-          break;
-        case "grade_desc":
-          this.store.sortRatingReverse();
-          break;
-        default:
-          break;
-      }
-    },
-  },
+  methods: {},
   computed: {},
 });
 </script>
 
 <style scoped>
-.sort-button {
-  text-align: right;
-}
 .main-text {
   margin-top: 1rem;
   padding: 0.5rem;

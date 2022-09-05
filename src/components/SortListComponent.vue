@@ -4,7 +4,16 @@
   <div class="person-container">
     <div class="person-header">
       <h2 class="name">{{ name }}</h2>
-      <h4>Rating: {{ rating }}</h4>
+      <div class="star-rating">
+        <star-rating
+          v-model:rating="rating"
+          v-bind:increment="0.5"
+          v-bind:max-rating="5"
+          v-bind:show-rating="false"
+          v-bind:read-only="true"
+          v-bind:star-size="30"
+        />
+      </div>
     </div>
     <ul class="occupations">
       <li v-for="occupation in occupations">{{ occupation }}</li>
@@ -17,8 +26,12 @@
 </template>
 
 <script lang="ts">
+import StarRating from "vue-star-rating";
 export default {
   props: ["name", "occupations", "aboutMe", "rating"],
+  components: {
+    StarRating,
+  },
 };
 </script>
 

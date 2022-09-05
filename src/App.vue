@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import TheHeader from "./components/VueHeader/TheHeader.vue";
-import SortList from "./components/SortList.vue";
-import MainPage from "./components/MainPage.vue";
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
   <TheHeader />
-  <MainPage />
-  <SortList />
+  <RouterView />
 </template>
 
 <script lang="ts">

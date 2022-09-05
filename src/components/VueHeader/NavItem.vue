@@ -7,7 +7,12 @@
       <div v-show="shown" class="acordion-content">
         <ul class="subtitle">
           <li class="subtitle-item" v-for="subtitle in subtitles">
-            {{ subtitle }}
+            <router-link
+              :to="subtitle.goto"
+              style="text-decoration: none; color: inherit"
+            >
+              {{ subtitle.show }}</router-link
+            >
           </li>
         </ul>
       </div>

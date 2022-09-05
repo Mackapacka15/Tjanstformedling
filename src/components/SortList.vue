@@ -2,10 +2,12 @@
 import SortListComponent from "./SortListComponent.vue";
 import { defineComponent } from "vue";
 import { store } from "./store";
-import type { person } from "./interface";
+import type { Person } from "./interface";
+import FilterBar from "./FilterBar.vue";
 </script>
 
 <template>
+  <FilterBar :showFilters="true" />
   <ul>
     <li v-for="people in store.peopleListFilterd">
       <SortListComponent
@@ -23,7 +25,7 @@ export default defineComponent({
   data() {
     return {
       store,
-      sortedArray: [] as Array<person>,
+      sortedArray: [] as Array<Person>,
     };
   },
   methods: {

@@ -1,15 +1,29 @@
 <script lang="ts" setup>
 import NavItem from "./NavItem.vue";
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
   <header>
-    <h1>Hemmafixarna</h1>
+    <router-link to="/" style="text-decoration: none; color: inherit">
+      <h1>Hemmafixarna</h1>
+    </router-link>
     <div class="navbar">
-      <NavItem title="Om Oss" :subtitles="['Svejsan', 'Hejdå', 'GodNatt']" />
+      <NavItem
+        title="Om Oss"
+        :subtitles="[
+          { goto: '/Svejsan', show: 'Svejsan' },
+          { goto: '/Hejdå', show: 'Hejdå' },
+          { goto: '/GodNatt', show: 'GodNatt' },
+        ]"
+      />
       <NavItem
         title="Mitt konto"
-        :subtitles="['Logga in', 'Redigera Anons', 'Lägga up anons']"
+        :subtitles="[
+          { goto: '/Logga-in', show: 'Logga in' },
+          { goto: '/Redigera-Anons', show: 'Redigera Anons' },
+          { goto: '/CreateListing', show: 'Lägg up anons' },
+        ]"
       />
     </div>
   </header>
@@ -20,9 +34,11 @@ header {
   display: grid;
   grid-template-columns: auto 1fr;
   background-color: rgb(255, 149, 97);
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   align-items: center;
   width: 100vw;
+  color: black;
+  text-decoration: none;
 }
 header h1 {
   grid-column: 1/2;

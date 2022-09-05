@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Målare"],
+    "aboutMe": "Jag heter Markus och gillar att programera",
+    "rating": 4
+  },
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Snickare"],
+    "aboutMe": "Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera.",
+    "rating": 2
+  },
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Snickare"],
+    "aboutMe": "Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera.",
+    "rating": 3
+  },
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Snickare"],
+    "aboutMe": "Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera.",
+    "rating": 1
+  },
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Snickare"],
+    "aboutMe": "Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera.",
+    "rating": 5
+  },
+  {
+    "name": "Markus",
+    "occupation": ["Programerare", "Snickare"],
+    "aboutMe": "Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera. Jag heter Markus och gillar att programera.",
+    "rating": 3
+  },
+  {
+    "name": "Bob",
+    "occupation": ["VVS-Installatör"],
+    "aboutMe": "Jag äslkar att banka på rör",
+    "rating": 5
+  },
+  {
+    "name": "Peter",
+    "occupation": ["Fågelskådare", "Cyber security expert"],
+    "aboutMe": "Jag gillar att ta bilder på fåglar och lura gamlingar på pengar",
+    "rating": 4
+  },
+  {
+    "name": "Petra",
+    "occupation": ["Blombutiksägare", "OS tävlare skytte"],
+    "aboutMe": "Jag gillar att odla i min trädgård och jaga älg",
+    "rating": 4
+  },
+  {
+    "name": "Petrus",
+    "occupation": ["Djurskötare", "Kustjägare"],
+    "aboutMe": "Jag gillar att jogga med hundarna jag tar hand om och i hemlighet lära de att attackera emos",
+    "rating": 5
+  },
+  {
+    "name": "Petter",
+    "occupation": ["Rörmokare"],
+    "aboutMe": "Jag är egentligen en alien från en annan planet men ingen annan vet om det, de tror att jag är schizofren",
+    "rating": 3
+  },
+  {
+    "name": "Pernilla",
+    "occupation": ["Embedded programmerare"],
+    "aboutMe": "Jag var med och skrev anarkistens kokbok",
+    "rating": 3
+  }
+]
