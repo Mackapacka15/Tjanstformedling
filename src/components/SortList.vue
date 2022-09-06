@@ -28,9 +28,7 @@ export default defineComponent({
       sortedArray: [] as Array<Person>,
     };
   },
-  methods: {
-    addPerson(): void {},
-  },
+  methods: {},
   computed: {},
 });
 </script>

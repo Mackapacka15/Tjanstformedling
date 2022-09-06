@@ -5,14 +5,15 @@ import people from "../data/people.json";
 export const store = reactive({
   filters: [] as Array<String>,
   newFilters(newFilters: Array<String>) {
-    this.filters = newFilters;
+    this.filters = newFilters.map((a) => a.toLocaleLowerCase());
   },
   peopleListFilterd: [] as Array<Person>,
   applyFilters() {
+    //To make sure it's empty
     this.peopleListFilterd = [] as Array<Person>;
     this.peopleList.forEach((element) => {
       element.occupation.forEach((occ) => {
-        if (this.filters.includes(occ)) {
+        if (this.filters.includes(occ.toLocaleLowerCase())) {
           this.peopleListFilterd.push(element);
         }
       });
