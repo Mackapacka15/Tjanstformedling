@@ -64,23 +64,21 @@ export default defineComponent({
 
 <style scoped>
 .bar {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
+  display: flex;
   background-color: rgba(0, 106, 255, 0.358);
   padding: 1rem;
   margin-top: 0.2rem;
+  width: 100vw;
 }
 .sort-button {
   margin: auto;
 }
-.search-main {
-  max-width: 20vw;
-}
 .search-button {
   padding: 0.3rem;
+  position: absolute;
 }
 .search-input {
+  font-size: 0.8rem;
   padding: 0.3rem;
   border-radius: 10px;
   border: 1px solid black;

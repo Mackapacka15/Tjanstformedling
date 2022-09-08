@@ -36,15 +36,11 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 600px) {
-  body {
-    font-size: 10px;
-  }
-}
 .person-container {
   border: 1px solid black;
   border-radius: 5px;
   max-width: 30vw;
+  min-height: 15vh;
   padding: 0.2rem;
   background-color: rgba(230, 226, 226, 0.111);
   box-shadow: 0px 2px 10px rgb(0, 0, 0);

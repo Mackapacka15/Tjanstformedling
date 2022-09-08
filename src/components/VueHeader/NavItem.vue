@@ -1,5 +1,8 @@
+<script setup lang="ts">
+import { defineComponent } from "vue";
+</script>
 <template>
-  <div @mouseover="shown = true" @mouseleave="shown = false">
+  <div @mouseover="stopHide" @mouseleave="startHide">
     <ul class="acordion-main">
       <div class="acordion-title">
         <li>{{ title }}</li>
@@ -21,14 +24,26 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   props: ["title", "subtitles"],
   data() {
     return {
       shown: false,
+      timeout: -1,
     };
   },
-};
+  methods: {
+    startHide(): void {
+      this.timeout = setTimeout(() => {
+        this.shown = false;
+      }, 100);
+    },
+    stopHide() {
+      clearTimeout(this.timeout);
+      this.shown = true;
+    },
+  },
+});
 </script>
 
 <style scoped>

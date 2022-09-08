@@ -45,25 +45,24 @@ export default defineComponent({
 </script>
 <style scoped>
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 98vw;
+  width: 100vw;
+  margin-top: 1rem;
   background-color: rgba(196, 234, 3, 0.454);
   padding: 1rem;
 }
 ul {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   list-style: none;
 }
 .footer-item {
   display: flex;
   flex-flow: column nowrap;
-  width: 30vw;
   padding: 1rem;
+  font-size: 1.1rem;
 }
 .footer-item p {
-  max-width: 20vw;
+  width: auto;
 }
 h4 {
   color: rgb(255, 132, 0);
