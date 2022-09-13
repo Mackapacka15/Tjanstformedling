@@ -1,35 +1,40 @@
 <script lang="ts" setup>
+import router from "@/router";
 import { defineComponent } from "vue";
 import { store } from "./store";
 </script>
 
 <template>
-  <div class="bar">
-    <div></div>
-    <div class="search-main">
-      <input
-        class="search-input"
-        type="text"
-        v-model="filters"
-        placeholder="Vad letar du efter?"
-      />
-      <RouterLink to="/SearchResult">
-        <button class="search-button" type="button" @click="setFilters">
-          <img
-            src="../img/magnifying-glass-svgrepo-com.svg"
-            alt="picture of a magnifying glas"
+  <div>
+    <div class="bar">
+      <div></div>
+      <div class="search-main">
+        <form @submit.prevent="setFilters">
+          <input
+            class="search-input"
+            type="text"
+            v-model="filters"
+            placeholder="Vad letar du efter?"
           />
-        </button>
-      </RouterLink>
-    </div>
+          <button class="search-button" type="submit">
+            <img
+              src="../img/magnifying-glass-svgrepo-com.svg"
+              alt="picture of a magnifying glas"
+            />
+          </button>
+        </form>
+      </div>
 
-    <div class="sort-button" v-show="showFilters">
-      <label for="Sort"> Sortera </label>
-      <select @change="sortInput" name="Sort" id="Sort">
-        <option></option>
-        <option value="grade_desc">Betyg</option>
-        <option value="grade_asc">Betyg (Lägst först)</option>
-      </select>
+      <div class="sort-button" v-show="showFilters">
+        <label for="Sort"> Sortera </label>
+        <select @change="sortInput" name="Sort" id="Sort">
+          <option></option>
+          <option value="grade_desc">Betyg</option>
+          <option value="grade_asc">Betyg (Lägst först)</option>
+          <option value="name_desc">Namn</option>
+          <option value="name_asc">Namn (Omvänd)</option>
+        </select>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +49,7 @@ export default defineComponent({
     setFilters() {
       store.newFilters(this.filters.split(",").map((a) => a.trim()));
       store.applyFilters();
+      router.push("/searchresult");
     },
     sortInput(event: any) {
       switch (event.target.value) {
@@ -53,12 +59,16 @@ export default defineComponent({
         case "grade_desc":
           this.store.sortRatingReverse();
           break;
+        case "name_asc":
+          this.store.sortName();
+          break;
+        case "name_desc":
+          this.store.sortNameReverse();
         default:
           break;
       }
     },
   },
-  computed: {},
 });
 </script>
 
@@ -74,8 +84,11 @@ export default defineComponent({
   margin: auto;
 }
 .search-button {
+  margin-left: -2.2rem;
   padding: 0.3rem;
   position: absolute;
+  background-color: inherit;
+  border: none;
 }
 .search-input {
   font-size: 0.8rem;

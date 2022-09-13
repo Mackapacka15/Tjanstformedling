@@ -21,13 +21,15 @@ import { defineComponent } from "vue";
             <li>Org nummer: 553942-8394</li>
           </ul>
         </li>
-        <li class="footer-item">
-          <h4>SSL-certifikat</h4>
-          <p>
-            Hemfixarna.se är säkrat med ett SSL certifikat som ser till att all
-            data som skickas mellan vår webbserver och din webbläsare förblir
-            privat och krypterad.
-          </p>
+        <li>
+          <div class="footer-item">
+            <h4>SSL-certifikat</h4>
+            <p>
+              Hemfixarna.se är säkrat med ett SSL certifikat som ser till att
+              all data som skickas mellan vår webbserver och din webbläsare
+              förblir privat och krypterad.
+            </p>
+          </div>
         </li>
       </ul>
     </div>
@@ -54,6 +56,7 @@ ul {
   display: flex;
   flex-flow: row wrap;
   list-style: none;
+  justify-content: space-evenly;
 }
 .footer-item {
   display: flex;
@@ -62,7 +65,7 @@ ul {
   font-size: 1.1rem;
 }
 .footer-item p {
-  width: auto;
+  width: calc(min(300px, 20rem));
 }
 h4 {
   color: rgb(255, 132, 0);

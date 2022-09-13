@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import { defineComponent } from "vue";
+import { getAuth, signOut } from "@firebase/auth";
+import router from "@/router";
 </script>
 <template>
   <div @mouseover="stopHide" @mouseleave="startHide">
     <div class="acordion-main">
       <div class="acordion-title">
-        <li>{{ title }}</li>
+        <li>{{ auth.currentUser?.displayName }}</li>
       </div>
       <div v-show="shown" class="acordion-content">
         <ul class="subtitle">
-          <li class="subtitle-item" v-for="subtitle in subtitles">
-            <router-link
-              :to="subtitle.goto"
-              style="text-decoration: none; color: inherit"
-            >
-              {{ subtitle.show }}</router-link
-            >
+          <li class="subtitle-item">
+            <button type="button" @click="signOutHandle">Sign Out</button>
           </li>
         </ul>
       </div>
@@ -25,11 +22,12 @@ import { defineComponent } from "vue";
 
 <script lang="ts">
 export default defineComponent({
-  props: ["title", "subtitles"],
+  props: ["subtitles"],
   data() {
     return {
       shown: false,
       timeout: -1,
+      auth: getAuth(),
     };
   },
   methods: {
@@ -41,6 +39,10 @@ export default defineComponent({
     stopHide() {
       clearTimeout(this.timeout);
       this.shown = true;
+    },
+    signOutHandle(): void {
+      router.push("/");
+      signOut(this.auth);
     },
   },
 });
@@ -82,5 +84,15 @@ export default defineComponent({
   padding-top: 0.5rem;
   margin-top: 0.1rem;
   border-bottom: 1px solid grey;
+}
+button {
+  text-decoration: none;
+  background-color: inherit;
+  border: none;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  font-size: inherit;
+  font-family: inherit;
 }
 </style>

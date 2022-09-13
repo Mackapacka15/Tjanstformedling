@@ -11,11 +11,12 @@
           v-bind:max-rating="5"
           v-bind:show-rating="false"
           v-bind:read-only="true"
-          v-bind:star-size="30"
+          v-bind:star-size="setSize()"
         />
       </div>
     </div>
     <ul class="occupations">
+      <h3>Yrken:</h3>
       <li v-for="occupation in occupations">{{ occupation }}</li>
     </ul>
     <div class="about-me">
@@ -32,6 +33,11 @@ export default {
   components: {
     StarRating,
   },
+  methods: {
+    setSize(): number {
+      return 2 * (window.innerWidth / 100 + 5);
+    },
+  },
 };
 </script>
 
@@ -40,6 +46,7 @@ export default {
   border: 1px solid black;
   border-radius: 5px;
   max-width: 30vw;
+  min-width: 200px;
   min-height: 15vh;
   padding: 0.2rem;
   background-color: rgba(230, 226, 226, 0.111);
@@ -50,9 +57,11 @@ export default {
 }
 .person-header {
   margin-bottom: 1rem;
+  font-size: 1.3rem;
 }
 .occupations {
   text-align: right;
+  font-size: 1.1rem;
 }
 .person-container * {
   padding: 0.2rem;
@@ -69,5 +78,15 @@ ul {
 p {
   overflow: hidden;
   max-height: 3.4em;
+  font-size: 1.1rem;
+}
+@media only screen and (max-width: 800px) {
+  .person-container {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .occupations {
+    text-align: left;
+  }
 }
 </style>

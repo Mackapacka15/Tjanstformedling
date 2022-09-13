@@ -1,6 +1,7 @@
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import type { Person } from "./interface";
 import people from "../data/people.json";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const store = reactive({
   filters: [] as Array<String>,
@@ -9,17 +10,22 @@ export const store = reactive({
   },
   peopleListFilterd: [] as Array<Person>,
   applyFilters() {
+    console.log("filter");
     //To make sure it's empty
     this.peopleListFilterd = [] as Array<Person>;
-    this.peopleList.forEach((element) => {
-      element.occupation.forEach((occ) => {
-        if (this.filters.includes(occ.toLocaleLowerCase())) {
-          this.peopleListFilterd.push(element);
-        }
-      });
+    this.peopleListFilterd = this.peopleList.filter((person: Person) => {
+      return (
+        person.occupation.find((occ: String) => {
+          return (
+            this.filters.find((filter) =>
+              occ.toLowerCase().includes(filter as string)
+            ) !== undefined
+          );
+        }) !== undefined
+      );
     });
   },
-  sortRating() {
+  sortRating(): void {
     this.peopleListFilterd.sort((n1, n2) => {
       if (n1.rating > n2.rating) {
         return 1;
@@ -30,7 +36,16 @@ export const store = reactive({
       return 0;
     });
   },
-  sortRatingReverse() {
+  sortName(): void {
+    this.peopleListFilterd.sort((a: Person, b: Person) =>
+      a.name.localeCompare(b.name as string)
+    );
+  },
+  sortNameReverse(): void {
+    this.sortName();
+    this.peopleListFilterd.reverse();
+  },
+  sortRatingReverse(): void {
     this.sortRating();
     this.peopleListFilterd.reverse();
   },

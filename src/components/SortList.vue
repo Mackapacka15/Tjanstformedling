@@ -35,9 +35,10 @@ export default defineComponent({
 
 <style scoped>
 ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-flow: row wrap;
   list-style: none;
+  justify-content: center;
 }
 li {
   margin: 1rem;
