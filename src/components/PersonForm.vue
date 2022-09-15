@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 import { defineComponent } from "vue";
-import { Person } from "./interface";
+import { Listing } from "./interface";
 import { store } from "./store";
-import { RouterLink, RouterView } from "vue-router";
 import router from "@/router";
+import {
+  addDoc,
+  CollectionReference,
+  type DocumentData,
+} from "@firebase/firestore";
 </script>
 
 <template>
@@ -54,8 +58,10 @@ import router from "@/router";
 
 <script lang="ts">
 export default defineComponent({
+  inject: ["g_colRef"],
   data() {
     return {
+      g_colRef: this.g_colRef,
       nameInput: "",
       occupations: "",
       aboutMe: "",
@@ -64,15 +70,34 @@ export default defineComponent({
   },
   methods: {
     submitForm() {
-      let newPerson = new Person(
+      let newPerson = new Listing(
         this.nameInput,
         this.occupations.split(",").map((a) => a.trim()),
-        this.aboutMe
+        this.aboutMe,
+        3
       );
       store.peopleList.push(newPerson);
+      addDoc(this.g_colRef as unknown as CollectionReference<DocumentData>, {
+        name: newPerson.name,
+        occupation: newPerson.occupation,
+        aboutMe: newPerson.aboutMe,
+        rating: newPerson.rating,
+      })
+        .then(() => console.log("Success Add person"))
+        .catch((error) => console.error(error.code));
       router.push("/");
       console.log("Submitted");
     },
+    // addAllPeople() {
+    //   store.peopleList.forEach((element) => {
+    //     addDoc(this.g_colRef as unknown as CollectionReference<DocumentData>, {
+    //       name: element.name,
+    //       occupation: element.occupation,
+    //       aboutMe: element.aboutMe,
+    //       rating: element.rating,
+    //     });
+    //   });
+    // },
   },
   computed: {},
 });

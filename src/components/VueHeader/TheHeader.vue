@@ -5,8 +5,6 @@ import { defineComponent } from "vue";
 import { RouterLink } from "vue-router";
 import { store } from "../store";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "@firebase/firestore";
-import { Person } from "../interface";
 </script>
 
 <template>
@@ -50,6 +48,7 @@ export default defineComponent({
   methods: {},
   computed: {},
   mounted() {
+    console.log("mounted");
     onAuthStateChanged(getAuth(), (user) => {
       if (user) this.isLogedIn = true;
       else this.isLogedIn = false;

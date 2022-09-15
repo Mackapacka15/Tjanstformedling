@@ -2,8 +2,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "./assets/main.css";
-import { store } from "./components/store";
-import type { Person } from "./components/interface";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -23,7 +21,10 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
+let db = getFirestore();
+const g_colRef = collection(db, "listings");
+
 const app = createApp(App);
 app.use(router);
-
+app.provide("g_colRef", g_colRef);
 app.mount("#app");

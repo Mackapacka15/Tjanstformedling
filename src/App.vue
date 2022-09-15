@@ -2,8 +2,12 @@
 import TheHeader from "./components/VueHeader/TheHeader.vue";
 import { RouterView } from "vue-router";
 import TheFooter from "./components/TheFooter.vue";
-import { getFirestore, collection, getDocs } from "@firebase/firestore";
-import { Person } from "./components/interface";
+import {
+  CollectionReference,
+  getDocs,
+  type DocumentData,
+} from "@firebase/firestore";
+import { Listing } from "./components/interface";
 import { store } from "./components/store";
 </script>
 
@@ -17,20 +21,22 @@ import { store } from "./components/store";
 
 <script lang="ts">
 export default {
+  inject: ["g_colRef"],
   data() {
-    return {};
+    return {
+      g_colRef: this.g_colRef,
+    };
   },
   mounted() {
-    const db = getFirestore();
-    const colref = collection(db, "listings");
-
-    getDocs(colref)
+    console.log("mounted");
+    store.peopleList = [];
+    getDocs(this.g_colRef as unknown as CollectionReference<DocumentData>)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           store.peopleList.push(
-            new Person(
+            new Listing(
               doc.data().name,
-              doc.data().occupations,
+              doc.data().occupation,
               doc.data().aboutMe,
               doc.data().rating
             )

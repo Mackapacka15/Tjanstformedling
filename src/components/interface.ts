@@ -1,4 +1,4 @@
-export class Person {
+export class Listing {
   public name: String;
   public occupation: Array<String>;
   public aboutMe: String;

@@ -47,7 +47,7 @@ export default {
   border-radius: 5px;
   max-width: 30vw;
   min-width: 200px;
-  min-height: 15vh;
+  min-height: 30vh;
   padding: 0.2rem;
   background-color: rgba(230, 226, 226, 0.111);
   box-shadow: 0px 2px 10px rgb(0, 0, 0);
@@ -80,7 +80,7 @@ p {
   max-height: 3.4em;
   font-size: 1.1rem;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
   .person-container {
     display: flex;
     flex-flow: row wrap;

@@ -11,6 +11,9 @@ import router from "@/router";
       </div>
       <div v-show="shown" class="acordion-content">
         <ul class="subtitle">
+          <li class="subtitle-item" @click="goto('createlisting')">
+            Create Listing
+          </li>
           <li class="subtitle-item">
             <button type="button" @click="signOutHandle">Sign Out</button>
           </li>
@@ -36,13 +39,16 @@ export default defineComponent({
         this.shown = false;
       }, 100);
     },
-    stopHide() {
+    stopHide(): void {
       clearTimeout(this.timeout);
       this.shown = true;
     },
     signOutHandle(): void {
       router.push("/");
       signOut(this.auth);
+    },
+    goto(destination: string): void {
+      router.push(destination);
     },
   },
 });

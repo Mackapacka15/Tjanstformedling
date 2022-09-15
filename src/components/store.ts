@@ -1,19 +1,19 @@
-import { reactive, onMounted } from "vue";
-import type { Person } from "./interface";
-import people from "../data/people.json";
-import { onAuthStateChanged } from "firebase/auth";
+import { reactive } from "vue";
+import type { Listing } from "./interface";
+import { collection } from "@firebase/firestore";
 
 export const store = reactive({
   filters: [] as Array<String>,
   newFilters(newFilters: Array<String>) {
     this.filters = newFilters.map((a) => a.toLocaleLowerCase());
   },
-  peopleListFilterd: [] as Array<Person>,
+  peopleListFilterd: [] as Array<Listing>,
   applyFilters() {
     console.log("filter");
     //To make sure it's empty
-    this.peopleListFilterd = [] as Array<Person>;
-    this.peopleListFilterd = this.peopleList.filter((person: Person) => {
+    this.peopleListFilterd = [] as Array<Listing>;
+    console.dir(this.peopleList);
+    this.peopleListFilterd = this.peopleList.filter((person: Listing) => {
       return (
         person.occupation.find((occ: String) => {
           return (
@@ -37,7 +37,7 @@ export const store = reactive({
     });
   },
   sortName(): void {
-    this.peopleListFilterd.sort((a: Person, b: Person) =>
+    this.peopleListFilterd.sort((a: Listing, b: Listing) =>
       a.name.localeCompare(b.name as string)
     );
   },
@@ -49,5 +49,5 @@ export const store = reactive({
     this.sortRating();
     this.peopleListFilterd.reverse();
   },
-  peopleList: people as Array<Person>,
+  peopleList: [] as Array<Listing>,
 });
