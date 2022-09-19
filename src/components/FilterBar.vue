@@ -9,7 +9,7 @@ import { store } from "./store";
     <div class="bar">
       <div></div>
       <div class="search-main">
-        <form @submit.prevent="setFilters">
+        <form @submit.prevent="setFilters()">
           <input
             class="search-input"
             type="text"

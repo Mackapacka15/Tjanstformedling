@@ -18,7 +18,7 @@ import {
     @sortRatingReverse="sortRatingReverse()"
     @sortName="sortName()"
     @sortNameReverse="sortNameReverse()"
-    @applyFilters="applyFilters"
+    @applyFilters="applyFilters()"
   />
   <ul>
     <li v-for="people in peopleListFilterd">
@@ -60,15 +60,13 @@ export default defineComponent({
     newFilters(newFilters: Array<String>) {
       this.filters = newFilters.map((a) => a.toLocaleLowerCase());
       console.log(this.filters);
-      this.applyFilters;
+      this.applyFilters();
     },
     applyFilters() {
-      console.log("filter");
-      console.log(this.filters);
-      console.log(this.peopleList);
-
+      console.log("Filter");
       //To make sure it's empty
       this.peopleListFilterd = [] as Array<Listing>;
+      console.log(this.filters);
       this.peopleListFilterd = this.peopleList.filter((person: Listing) => {
         return (
           person.occupation.find((occ: String) => {
@@ -80,6 +78,7 @@ export default defineComponent({
           }) !== undefined
         );
       });
+      console.log(this.peopleListFilterd);
     },
     sortName(): void {
       this.peopleListFilterd.sort((a: Listing, b: Listing) =>
@@ -96,7 +95,7 @@ export default defineComponent({
     },
     updatePeople() {
       console.log("UpdatePeopleFirebase");
-      this.peopleListFilterd = [];
+      this.peopleList = [];
       getDocs(this.colRef as unknown as CollectionReference<DocumentData>)
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
@@ -111,12 +110,13 @@ export default defineComponent({
           });
         })
         .catch((error) => console.log(error));
-      console.log(this.peopleListFilterd);
     },
   },
   computed: {},
   created() {
+    console.log("Created");
     this.updatePeople();
+    this.applyFilters();
   },
 });
 </script>
