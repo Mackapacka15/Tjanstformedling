@@ -47,23 +47,25 @@ export default defineComponent({
   },
   methods: {
     setFilters() {
-      store.newFilters(this.filters.split(",").map((a) => a.trim()));
-      store.applyFilters();
+      let newFilters = this.filters.split(",").map((a) => a.trim());
+      store.filters = newFilters;
+      this.$emit("applyFilters");
       router.push("/searchresult");
     },
     sortInput(event: any) {
+      console.log("Sortinput");
       switch (event.target.value) {
         case "grade_asc":
-          this.store.sortRating();
+          this.$emit("sortRating");
           break;
         case "grade_desc":
-          this.store.sortRatingReverse();
+          this.$emit("sortRatingReverse");
           break;
         case "name_asc":
-          this.store.sortName();
+          this.$emit("sortName");
           break;
         case "name_desc":
-          this.store.sortNameReverse();
+          this.$emit("sortNameReverse");
         default:
           break;
       }

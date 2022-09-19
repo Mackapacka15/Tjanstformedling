@@ -48,7 +48,6 @@ export default defineComponent({
   methods: {},
   computed: {},
   mounted() {
-    console.log("mounted");
     onAuthStateChanged(getAuth(), (user) => {
       if (user) this.isLogedIn = true;
       else this.isLogedIn = false;

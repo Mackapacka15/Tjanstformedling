@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { defineComponent } from "vue";
-import { store } from "./store";
 import FilterBar from "./FilterBar.vue";
 </script>
 
@@ -23,7 +22,7 @@ import FilterBar from "./FilterBar.vue";
 <script lang="ts">
 export default defineComponent({
   data() {
-    return { store };
+    return {};
   },
   methods: {},
   computed: {},
