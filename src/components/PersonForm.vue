@@ -76,7 +76,6 @@ export default defineComponent({
         this.aboutMe,
         3
       );
-      store.peopleList.push(newPerson);
       addDoc(this.g_colRef as unknown as CollectionReference<DocumentData>, {
         name: newPerson.name,
         occupation: newPerson.occupation,
@@ -88,18 +87,7 @@ export default defineComponent({
       router.push("/");
       console.log("Submitted");
     },
-    // addAllPeople() {
-    //   store.peopleList.forEach((element) => {
-    //     addDoc(this.g_colRef as unknown as CollectionReference<DocumentData>, {
-    //       name: element.name,
-    //       occupation: element.occupation,
-    //       aboutMe: element.aboutMe,
-    //       rating: element.rating,
-    //     });
-    //   });
-    // },
   },
-  computed: {},
 });
 </script>
 

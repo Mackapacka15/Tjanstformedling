@@ -9,7 +9,7 @@ import { store } from "./store";
     <div class="bar">
       <div></div>
       <div class="search-main">
-        <form @submit.prevent="setFilters">
+        <form @submit.prevent="setFilters()">
           <input
             class="search-input"
             type="text"
@@ -47,23 +47,26 @@ export default defineComponent({
   },
   methods: {
     setFilters() {
-      store.newFilters(this.filters.split(",").map((a) => a.trim()));
-      store.applyFilters();
+      let newFilters = this.filters.split(",").map((a) => a.trim());
+      store.filters = newFilters;
+      console.log("store", store.filters);
+      this.$emit("applyFilters");
       router.push("/searchresult");
     },
     sortInput(event: any) {
+      console.log("Sortinput");
       switch (event.target.value) {
         case "grade_asc":
-          this.store.sortRating();
+          this.$emit("sortRating");
           break;
         case "grade_desc":
-          this.store.sortRatingReverse();
+          this.$emit("sortRatingReverse");
           break;
         case "name_asc":
-          this.store.sortName();
+          this.$emit("sortName");
           break;
         case "name_desc":
-          this.store.sortNameReverse();
+          this.$emit("sortNameReverse");
         default:
           break;
       }

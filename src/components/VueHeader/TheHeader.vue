@@ -16,9 +16,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
       <NavItem
         title="Om Oss"
         :subtitles="[
-          { goto: '/svejsan', show: 'Svejsan' },
-          { goto: '/hejdå', show: 'Hejdå' },
-          { goto: '/godnatt', show: 'GodNatt' },
+          { goto: '/', show: 'Svejsan' },
+          { goto: '/', show: 'Hejdå' },
+          { goto: '/', show: 'GodNatt' },
         ]"
       />
       <NavItem
@@ -29,14 +29,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
           { goto: '/createaccount', show: 'Skapa konto' },
         ]"
       />
-      <NavLogIn
-        v-show="isLogedIn"
-        :subtitles="[
-          { goto: '/Mitt Konto', show: 'Mitt Konto' },
-          { goto: '/redigera-Anons', show: 'Redigera Anons' },
-          { goto: '/createlisting', show: 'Lägg up anons' },
-        ]"
-      />
+      <NavLogIn v-show="isLogedIn" />
     </div>
   </header>
 </template>
@@ -48,7 +41,6 @@ export default defineComponent({
   methods: {},
   computed: {},
   mounted() {
-    console.log("mounted");
     onAuthStateChanged(getAuth(), (user) => {
       if (user) this.isLogedIn = true;
       else this.isLogedIn = false;
