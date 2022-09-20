@@ -12,13 +12,13 @@ import router from "@/router";
       <div v-show="shown" class="acordion-content">
         <ul class="subtitle">
           <li class="subtitle-item" @click="goto('createlisting')">
-            Create Listing
+            Skapa Annons
           </li>
           <li class="subtitle-item">
-            <button type="button" @click="goto('mypage')">My Page</button>
+            <button type="button" @click="goto('mypage')">Min Profil</button>
           </li>
           <li class="subtitle-item">
-            <button type="button" @click="signOutHandle">Sign Out</button>
+            <button type="button" @click="signOutHandle">Logga ut</button>
           </li>
         </ul>
       </div>
