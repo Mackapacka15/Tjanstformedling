@@ -15,6 +15,9 @@ import router from "@/router";
             Create Listing
           </li>
           <li class="subtitle-item">
+            <button type="button" @click="goto('mypage')">My Page</button>
+          </li>
+          <li class="subtitle-item">
             <button type="button" @click="signOutHandle">Sign Out</button>
           </li>
         </ul>

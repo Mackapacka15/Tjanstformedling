@@ -6,6 +6,7 @@ import { Listing } from "./interface";
 import FilterBar from "./FilterBar.vue";
 import {
   getDocs,
+  onSnapshot,
   type CollectionReference,
   type DocumentData,
 } from "firebase/firestore";
@@ -21,7 +22,7 @@ import {
     @applyFilters="applyFilters()"
   />
   <ul>
-    <li v-for="people in peopleListFilterd">
+    <li v-for="people in peopleListFiltered">
       <SortListComponent
         :name="people.name"
         :occupations="people.occupation"
@@ -40,14 +41,12 @@ export default defineComponent({
       colRef: this.g_colRef,
       store,
       peopleList: [] as Array<Listing>,
-      peopleListFilterd: [] as Array<Listing>,
-      filters: store.filters,
+      peopleListFiltered: [] as Array<Listing>,
     };
   },
   methods: {
     sortRating(): void {
-      console.log(this.peopleList);
-      this.peopleListFilterd.sort((n1, n2) => {
+      this.peopleListFiltered.sort((n1, n2) => {
         if (n1.rating > n2.rating) {
           return 1;
         }
@@ -57,65 +56,82 @@ export default defineComponent({
         return 0;
       });
     },
-    newFilters(newFilters: Array<String>) {
-      this.filters = newFilters.map((a) => a.toLocaleLowerCase());
-      console.log(this.filters);
-      this.applyFilters();
-    },
     applyFilters() {
       console.log("Filter");
       //To make sure it's empty
-      this.peopleListFilterd = [] as Array<Listing>;
-      console.log(this.filters);
-      this.peopleListFilterd = this.peopleList.filter((person: Listing) => {
+      this.peopleListFiltered = [] as Array<Listing>;
+
+      console.log("people list", this.peopleList);
+      console.log("filter", store.filters[0]);
+
+      this.peopleListFiltered = this.peopleList.filter((listing: Listing) => {
         return (
-          person.occupation.find((occ: String) => {
+          listing.occupation.find((occ: String) => {
             return (
-              this.filters.find((filter) =>
-                occ.toLowerCase().includes(filter as string)
+              store.filters.find((filter) =>
+                occ.toLowerCase().includes(filter.toLowerCase() as string)
               ) !== undefined
             );
           }) !== undefined
         );
       });
-      console.log(this.peopleListFilterd);
+
+      console.log("People Filtered");
+
+      console.log(this.peopleListFiltered);
     },
     sortName(): void {
-      this.peopleListFilterd.sort((a: Listing, b: Listing) =>
+      this.peopleListFiltered.sort((a: Listing, b: Listing) =>
         a.name.localeCompare(b.name as string)
       );
     },
     sortNameReverse(): void {
       this.sortName();
-      this.peopleListFilterd.reverse();
+      this.peopleListFiltered.reverse();
     },
     sortRatingReverse(): void {
       this.sortRating();
-      this.peopleListFilterd.reverse();
-    },
-    updatePeople() {
-      console.log("UpdatePeopleFirebase");
-      this.peopleList = [];
-      getDocs(this.colRef as unknown as CollectionReference<DocumentData>)
-        .then((snapshot) => {
-          snapshot.docs.forEach((doc) => {
-            this.peopleList.push(
-              new Listing(
-                doc.data().name,
-                doc.data().occupation,
-                doc.data().aboutMe,
-                doc.data().rating
-              )
-            );
-          });
-        })
-        .catch((error) => console.log(error));
+      this.peopleListFiltered.reverse();
     },
   },
   computed: {},
-  created() {
+  async created() {
     console.log("Created");
-    this.updatePeople();
+
+    let snapshot = await getDocs(
+      this.colRef as unknown as CollectionReference<DocumentData>
+    ).catch((error) => console.log(error));
+
+    if (!snapshot) return;
+
+    snapshot.docs.forEach((doc) => {
+      this.peopleList.push(
+        new Listing(
+          doc.data().name,
+          doc.data().occupation,
+          doc.data().aboutMe,
+          doc.data().rating
+        )
+      );
+    });
+
+    onSnapshot(
+      this.colRef as unknown as CollectionReference<DocumentData>,
+      (snapshot) => {
+        this.peopleList = [];
+        snapshot.docs.forEach((doc) => {
+          this.peopleList.push(
+            new Listing(
+              doc.data().name,
+              doc.data().occupation,
+              doc.data().aboutMe,
+              doc.data().rating
+            )
+          );
+        });
+      }
+    );
+
     this.applyFilters();
   },
 });

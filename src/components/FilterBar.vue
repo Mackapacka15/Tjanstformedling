@@ -49,6 +49,7 @@ export default defineComponent({
     setFilters() {
       let newFilters = this.filters.split(",").map((a) => a.trim());
       store.filters = newFilters;
+      console.log("store", store.filters);
       this.$emit("applyFilters");
       router.push("/searchresult");
     },
