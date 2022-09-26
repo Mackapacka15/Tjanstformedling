@@ -3,8 +3,8 @@ import { defineComponent } from "vue";
 </script>
 <template>
   <div>
-    <h1>Sorry! Page not found</h1>
-    <h2>You might need to log in to view this page</h2>
+    <h1>Sorry! Sidan hittades inte</h1>
+    <h2>Du kanske behöver vara inloggad för att se denna sida</h2>
   </div>
 </template>
 

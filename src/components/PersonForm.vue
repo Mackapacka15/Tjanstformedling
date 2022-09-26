@@ -8,6 +8,7 @@ import {
   CollectionReference,
   type DocumentData,
 } from "@firebase/firestore";
+import { getAuth } from "@firebase/auth";
 </script>
 
 <template>
@@ -74,16 +75,19 @@ export default defineComponent({
         this.nameInput,
         this.occupations.split(",").map((a) => a.trim()),
         this.aboutMe,
-        3
+        3,
+        getAuth().currentUser?.uid
       );
       addDoc(this.g_colRef as unknown as CollectionReference<DocumentData>, {
         name: newPerson.name,
         occupation: newPerson.occupation,
         aboutMe: newPerson.aboutMe,
         rating: newPerson.rating,
+        userId: newPerson.userId,
       })
         .then(() => console.log("Success Add person"))
         .catch((error) => console.error(error.code));
+
       router.push("/");
       console.log("Submitted");
     },

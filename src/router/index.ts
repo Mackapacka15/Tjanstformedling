@@ -52,6 +52,11 @@ const router = createRouter({
       name: "404",
       component: () => import("../components/404.vue"),
     },
+    {
+      path: "/pagenotfound",
+      name: "404",
+      component: () => import("../components/404.vue"),
+    },
   ],
 });
 const getCurrentUser = () => {
@@ -72,8 +77,7 @@ router.beforeEach(async (to, from, next) => {
     if (await getCurrentUser()) {
       next();
     } else {
-      alert("You dont have acces");
-      next("/");
+      next("/pagenotfound");
     }
   } else next();
 });
